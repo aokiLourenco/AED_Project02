@@ -274,19 +274,21 @@ static void hash_table_print(hash_table_t *hash_table)
   for (int i = 0; i < hash_table->hash_table_size; i++)
   {
     hash_table_node_t *node = hash_table->heads[i];
+    adjacency_node_t *adj_node = node->head;
     while (node != NULL)
     {
-      printf("%s\n", node->word);
-      count=0;
-      adjacency_node_t *adj_node = node->head;
+      printf("%s ", node->word);
 
+      count=0;
+
+      adjacency_node_t *adj_node = node->head;
       while(adj_node != NULL)
       {
         count = count+1;
         adj_node = adj_node->next;
       }
       
-      printf("%d ",count);
+      printf("%d\n",count);
       node = node->next;
     }
   }
