@@ -274,20 +274,19 @@ static void hash_table_print(hash_table_t *hash_table)
   for (int i = 0; i < hash_table->hash_table_size; i++)
   {
     hash_table_node_t *node = hash_table->heads[i];
-    adjacency_node_t *adj_node = node->head;
     while (node != NULL)
     {
       printf("%s\n", node->word);
-
       count=0;
+      adjacency_node_t *adj_node = node->head;
+
       while(adj_node != NULL)
       {
         count = count+1;
         adj_node = adj_node->next;
       }
       
-      fprintf("%d",count);
-      printf("\n");
+      printf("%d ",count);
       node = node->next;
     }
   }
@@ -866,8 +865,9 @@ int main(int argc,char **argv)
     fprintf(stderr,"  1 WORD       (list the connected component WORD belongs to)\n");
     fprintf(stderr,"  2 FROM TO    (list the shortest path from FROM to TO)\n");
     fprintf(stderr,"  3 GRAPH INFO (graph_info)\n");
-    fprintf(stderr,"  4 HASH TABLE INFO (hash_table_info)\n");
-    fprintf(stderr,"  5            (terminate)\n");
+    fprintf(stderr,"  4 HASH INFO  (hash_table_info)\n");
+    fprintf(stderr,"  5 HASH PRINT (hash_table_print)\n");
+    fprintf(stderr,"  6            (terminate)\n");
     fprintf(stderr,"> ");
     if(scanf("%99s",word) != 1)
       break;
@@ -895,6 +895,9 @@ int main(int argc,char **argv)
       hash_table_info(hash_table);
 
     } else if (command == 5){
+      hash_table_print(hash_table);
+
+    } else if (command == 6){
       break;
     }
   }
