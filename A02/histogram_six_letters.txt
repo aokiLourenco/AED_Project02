@@ -1,0 +1,10 @@
+
+Number of edges: 36204 
+Number of vertices: 15654 
+Number of connected components: 15654 
+Number of vertices in the largest connected component: 11613 
+Average number of vertices in a connected component: 1.000000 
+Average number of edges in a connected component: 2.312763 
+Average degree of a vertex: 2.312763 
+Largest diameter of the graph: 57 
+Smallest diameter of the graph: 0 
