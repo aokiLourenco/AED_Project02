@@ -786,6 +786,35 @@ static void graph_info(hash_table_t *hash_table)
   free(representatives);
 }
 
+static void hash_table_info(hash_table_t *hash_table){
+
+  int number_of_collisions = 0, number_of_empty_lists = 0, max = 0, min = 100000, number_of_lists = 0;
+  for (int i = 0; i < hash_table->hash_table_size; i++){
+    int length = 0;
+    hash_table_node_t *node = hash_table->heads[i];
+    while (node != NULL){
+      length++;
+      node = node->next;
+    }
+    if (length > max){
+      max = length;
+    }
+    if (length < min && length != 0){
+      min = length;
+    }
+    if (length == 0){
+      number_of_empty_lists++;
+    }
+  }
+
+  printf("Number of entries: %d\n", hash_table->number_of_entries);
+  printf("Number of empty list: %d\n", number_of_empty_lists);
+  printf("Load factor: %f\n", (float)hash_table->number_of_entries / (float)hash_table->hash_table_size);
+  printf("Max length of linked lists: %d\n", max);
+  printf("Min length of linked lists: %d\n", min);
+
+}
+
 
 //
 // main program
@@ -816,7 +845,7 @@ int main(int argc,char **argv)
   for(i = 0u;i < hash_table->hash_table_size;i++)
     for(node = hash_table->heads[i];node != NULL;node = node->next)
       similar_words(hash_table,node);
-  graph_info(hash_table);
+  //graph_info(hash_table);
   // ask what to do
   for(;;)
   {
@@ -824,7 +853,9 @@ int main(int argc,char **argv)
     fprintf(stderr,"Your wish is my command:\n");
     fprintf(stderr,"  1 WORD       (list the connected component WORD belongs to)\n");
     fprintf(stderr,"  2 FROM TO    (list the shortest path from FROM to TO)\n");
-    fprintf(stderr,"  3            (terminate)\n");
+    fprintf(stderr,"  3 Graph Info (graph_info)\n");
+    fprintf(stderr,"  4 table info (hash_table_info)\n");
+    fprintf(stderr,"  5            (terminate)\n");
     fprintf(stderr,"> ");
     if(scanf("%99s",word) != 1)
       break;
@@ -844,21 +875,26 @@ int main(int argc,char **argv)
       path_finder(hash_table,from,to);
     }
     else if(command == 3)
-      break;
+      {
+      graph_info(hash_table);
+      }
     else if (command == 4)
     {
-      int j = 0;
-      for (i = 0; i < hash_table->hash_table_size; i++)
-      {
-        for (node = hash_table->heads[i]; node != NULL; node = node->next)
-        {
-          printf("indice = %d -> %s\n", hash_table->heads[i], node->word);
-          j++;
-        }
-      }
+      //int j = 0;
+      //for (i = 0; i < hash_table->hash_table_size; i++)
+      //{
+       // for (node = hash_table->heads[i]; node != NULL; node = node->next)
+        //{
+        //  printf("indice = %d -> %s\n", hash_table->heads[i], node->word);
+          //j++;
+        //}
+      //}
 
-      printf("j = %d\n", j);
-    }
+      //printf("j = %d\n", j);
+      hash_table_info(hash_table);
+    } else if (command == 5){
+      break;
+     
   }
   // clean up
   hash_table_free(hash_table);
