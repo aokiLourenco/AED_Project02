@@ -287,7 +287,7 @@ static void hash_table_print(hash_table_t *hash_table)
       }
       
       fprintf("%d",count);
-      fprintf("\n");
+      printf("\n");  
       node = node->next;
     }
   }
