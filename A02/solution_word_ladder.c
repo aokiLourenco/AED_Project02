@@ -269,12 +269,25 @@ static void hash_table_free(hash_table_t *hash_table)
 // funtion that prints the hash table
 static void hash_table_print(hash_table_t *hash_table)
 {
+  int i, count;
+
   for (int i = 0; i < hash_table->hash_table_size; i++)
   {
     hash_table_node_t *node = hash_table->heads[i];
+    adjacency_node_t *adj_node = node->head;
     while (node != NULL)
     {
       printf("%s\n", node->word);
+
+      count=0;
+      while(adj_node != NULL)
+      {
+        count = count+1;
+        adj_node = adj_node->next;
+      }
+      
+      fprintf("%d",count);
+      fprintf("\n");
       node = node->next;
     }
   }
@@ -846,6 +859,7 @@ int main(int argc,char **argv)
     for(node = hash_table->heads[i];node != NULL;node = node->next)
       similar_words(hash_table,node);
   //graph_info(hash_table);
+  hash_table_print(hash_table);
   // ask what to do
   for(;;)
   {
@@ -894,7 +908,7 @@ int main(int argc,char **argv)
       hash_table_info(hash_table);
     } else if (command == 5){
       break;
-     
+    }
   }
   // clean up
   hash_table_free(hash_table);
