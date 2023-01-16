@@ -290,6 +290,7 @@ static void hash_table_print(hash_table_t *hash_table)
       
       printf("%d\n",count);
       node = node->next;
+      
     }
   }
 }
@@ -861,6 +862,25 @@ int main(int argc,char **argv)
   //graph_info(hash_table);
   //hash_table_print(hash_table);
   // ask what to do
+
+  // for (unsigned int i = 0; i < hash_table->hash_table_size; i++) // loop through the hash table
+  // {
+  //   hash_table_node_t *node = hash_table->heads[i]; // set node to the first element of the hash table
+  //   while (node != NULL)                            // while the node has a next node
+  //   {
+  //     hash_table_node_t *temp = node;          // set temp to the node
+  //     node = node->next;                       // set node to the next node                    // free the temp node
+  //     adjacency_node_t *adj_node = temp->head; // set adj_node to the first element of the adjacency list
+  //     while (adj_node != NULL)                 // while the adj_node has a next node
+  //     {
+  //       adjacency_node_t *temp_adj = adj_node;                 // set temp_adj to the adj_node
+  //       adj_node = adj_node->next;                             // set adj_node to the next node
+  //       printf("%s %s\n", temp->word, temp_adj->vertex->word); // print the word and the word in the adjacency list")
+  //     }
+  //   }
+  // }
+  // return 0;
+  
   for(;;)
   {
     fprintf(stderr,"\nYour wish is my command:\n");
