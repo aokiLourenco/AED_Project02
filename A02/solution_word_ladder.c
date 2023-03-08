@@ -266,34 +266,6 @@ static void hash_table_free(hash_table_t *hash_table)
   free(hash_table);
 }
 
-// funtion that prints the hash table
-static void hash_table_print(hash_table_t *hash_table)
-{
-  int i, count;
-
-  for (int i = 0; i < hash_table->hash_table_size; i++)
-  {
-    hash_table_node_t *node = hash_table->heads[i];
-    adjacency_node_t *adj_node = node->head;
-    while (node != NULL)
-    {
-      printf("%s ", node->word);
-
-      count=0;
-
-      adjacency_node_t *adj_node = node->head;
-      while(adj_node != NULL)
-      {
-        count = count+1;
-        adj_node = adj_node->next;
-      }
-      
-      printf("%d\n",count);
-      node = node->next;
-      
-    }
-  }
-}
 
 static hash_table_node_t *find_word(hash_table_t *hash_table, const char *word, int insert_if_not_found)
 {
